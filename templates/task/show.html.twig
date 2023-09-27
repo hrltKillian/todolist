@@ -21,12 +21,12 @@
 </div>
 
 {% for task in tasks %}
-<div>
-    <h2>{{ task.title }}</h2>    
-    <p>{{ task.description|nl2br }}</p> 
-    <a href="{{ path('app_tasks_edit', {user_slug: user_slug, slug: task.slug}) }}">Edit</a>
-    <a href="{{ path('app_tasks_delete', {user_slug: user_slug, slug: task.slug}) }}" onclick="return confirm('Are you sure to delete -{{ task.title }}- ?')" >Delete</a>
+<div data-controller="task">
+    <h2 data-action="click->task#toggle">{{ task.title }}</h2>    
+    <p data-task-target="description" style="overflow: hidden;">{{ task.description|nl2br }}</p>
 </div>
+<a href="{{ path('app_tasks_edit', {user_slug: user_slug, slug: task.slug}) }}">Edit</a>
+<a href="{{ path('app_tasks_delete', {user_slug: user_slug, slug: task.slug}) }}" onclick="return confirm('Are you sure to delete -{{ task.title }}- ?')" >Delete</a>
 {% else %}
     <p>You have no task... Create One !</p>
 {% endfor %}
