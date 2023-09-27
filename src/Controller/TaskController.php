@@ -44,7 +44,7 @@ class TaskController extends AbstractController
             $task = $form->getData();
             $entityManagerInterface->persist($task);
             $entityManagerInterface->flush();
-            //$this->addFlash("success", "Vous avez bien créé votre tâche.");
+            $this->addFlash("success", "Vous avez bien créé votre tâche.");
             return $this->redirectToRoute("app_tasks_show",['user_slug' => $user_slug]);
         }
         return $this->render('task/new.html.twig', [
@@ -66,7 +66,7 @@ class TaskController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) 
         {
             $entityManagerInterface->flush();
-            //$this->addFlash("success", "Vous avez bien modifié votre tâche.");
+            $this->addFlash("success", "Vous avez bien modifié votre tâche.");
             return $this->redirectToRoute("app_tasks_show",['user_slug' => $user_slug]);
         }
         return $this->render('task/edit.html.twig', [
@@ -85,7 +85,7 @@ class TaskController extends AbstractController
     {
         $entityManagerInterface->remove($task);
         $entityManagerInterface->flush();
-        //$this->addFlash("success", "Vous avez bien supprimé votre tâche.");
+        $this->addFlash("success", "Vous avez bien supprimé votre tâche.");
         return $this->redirectToRoute("app_tasks_show",['user_slug' => $user_slug]);
     }
 }

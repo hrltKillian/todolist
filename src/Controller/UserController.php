@@ -36,7 +36,7 @@ class UserController extends AbstractController
             $user = $form->getData();
             $entityManagerInterface->persist($user);
             $entityManagerInterface->flush();
-            //$this->addFlash("success", "Vous avez bien créé votre compte client.");
+            $this->addFlash("success", "Vous avez bien créé votre compte client.");
             return $this->redirectToRoute("app_users");
         }
         return $this->render('user/new.html.twig', [
@@ -56,7 +56,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) 
         {
             $entityManagerInterface->flush();
-            //$this->addFlash("success", "Vous avez bien édité votre compte client.");
+            $this->addFlash("success", "Vous avez bien édité votre compte client.");
             return $this->redirectToRoute("app_users");
         }
         return $this->render('user/edit.html.twig', [
@@ -73,7 +73,7 @@ class UserController extends AbstractController
     {
         $entityManagerInterface->remove($user);
         $entityManagerInterface->flush();
-        //$this->addFlash("success", "Vous avez bien supprimé votre compte client.");
+        $this->addFlash("success", "Vous avez bien supprimé votre compte client.");
         return $this->redirectToRoute("app_users");
     }
 }
