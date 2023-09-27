@@ -10,6 +10,16 @@
     <a href="{{ path('app_tasks_new', {user_slug: user_slug}) }}">Add tasks</a>
 </div>
 
+<div>
+    <p{% if tasks.isSorted('t.id') %} class="sorted" {% endif %}>
+        Sort by {{ knp_pagination_sortable(tasks, 'Id', 'tasks.id') }}
+    </p>
+    
+    <p{% if tasks.isSorted('t.title') %} class="sorted" {% endif %}>
+        Sort by {{ knp_pagination_sortable(tasks, 'Title', 'u.title') }}
+    </p>
+</div>
+
 {% for task in tasks %}
 <div>
     <h2>{{ task.title }}</h2>    
@@ -20,5 +30,7 @@
 {% else %}
     <p>You have no task... Create One !</p>
 {% endfor %}
-
+<div class="navigation">
+    {{ knp_pagination_render(tasks) }}
+</div>
 {% endblock %}

@@ -10,16 +10,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 class UserController extends AbstractController
 {
     #[Route('/users', name: 'app_users')]
     public function index(
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        PaginatorInterface $paginationInterface,
+        Request $request
     ): Response
     {
+        $pagination = $paginationInterface->paginate(
+            $userRepository->createQueryBuilder("u"),
+            $request->query->getInt('page', 1),
+            3
+        );
+
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll()
+            'users' => $pagination
         ]);
     }
 

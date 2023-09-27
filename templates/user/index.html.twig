@@ -9,6 +9,16 @@
     <a href="{{ path('app_users_new') }}">Add customer</a>
 </div>
 
+<div>
+    <p{% if users.isSorted('u.id') %} class="sorted" {% endif %}>
+        Sort by {{ knp_pagination_sortable(users, 'Id', 'u.id') }}
+    </p>
+    
+    <p{% if users.isSorted('u.username') %} class="sorted" {% endif %}>
+        Sort by {{ knp_pagination_sortable(users, 'Username', 'u.username') }}
+    </p>
+</div>
+
 {% for user in users %}
 <div>
     <h2><a href="{{ path('app_tasks_show', { user_slug: user.slug }) }}">{{ user.username }}</a></h2>    
@@ -19,4 +29,7 @@
 {% else %}
     <p>No customer in database</p>
 {% endfor %}
+<div class="navigation">
+    {{ knp_pagination_render(users) }}
+</div>
 {% endblock %}

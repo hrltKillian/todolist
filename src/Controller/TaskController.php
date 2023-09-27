@@ -6,6 +6,7 @@ use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,16 +17,23 @@ class TaskController extends AbstractController
     #[Route('/users/{user_slug}/tasks', name: 'app_tasks_show')]
     public function index(
         string $user_slug,
-        TaskRepository $taskRepository
+        TaskRepository $taskRepository,
+        PaginatorInterface $paginationInterface,
+        Request $request
     ): Response
     {
-        return $this->render('task/show.html.twig', [
-            'tasks' => $taskRepository->createQueryBuilder("t")
+        $pagination = $paginationInterface->paginate(
+            $taskRepository->createQueryBuilder("t")
                 ->select('t')
                 ->join('t.user','u')
                 ->where('t.user = u.id AND u.slug = :user_slug')
                 ->setParameter('user_slug', $user_slug)
                 ->getQuery()->getResult(),
+            $request->query->getInt('page', 1),
+            3
+        );
+        return $this->render('task/show.html.twig', [
+            'tasks' => $pagination,
             "user_slug" => $user_slug
         ]);
     }
