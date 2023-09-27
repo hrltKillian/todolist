@@ -13,9 +13,9 @@
 {% for task in tasks %}
 <div>
     <h2>{{ task.title }}</h2>    
-    <p>{{ task.description }}</p> 
-    <a href="">Edit</a>
-    <a href="" onclick="return confirm('Are you sure to delete -{{ task.title }}- ?')" >Delete</a>
+    <p>{{ task.description|nl2br }}</p> 
+    <a href="{{ path('app_tasks_edit', {user_slug: user_slug, slug: task.slug}) }}">Edit</a>
+    <a href="{{ path('app_tasks_delete', {user_slug: user_slug, slug: task.slug}) }}" onclick="return confirm('Are you sure to delete -{{ task.title }}- ?')" >Delete</a>
 </div>
 {% else %}
     <p>You have no task... Create One !</p>

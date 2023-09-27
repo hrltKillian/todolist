@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -50,5 +51,41 @@ class TaskController extends AbstractController
             "form" => $form,
             "user_slug" => $user_slug
         ]);
+    }
+
+    #[Route('users/{user_slug}/tasks/{slug}/edit', name: 'app_tasks_edit')]
+    public function edit(
+        string $user_slug,
+        Request $request,
+        EntityManagerInterface $entityManagerInterface,
+        Task $task
+    ): Response
+    {
+        $form = $this->createForm(TaskType::class, $task);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            $entityManagerInterface->flush();
+            //$this->addFlash("success", "Vous avez bien modifié votre tâche.");
+            return $this->redirectToRoute("app_tasks_show",['user_slug' => $user_slug]);
+        }
+        return $this->render('task/edit.html.twig', [
+            "form" => $form,
+            "task" => $task,
+            "user_slug" => $user_slug
+        ]);
+    }
+
+    #[Route('users/{user_slug}/tasks/{slug}/delete', name: 'app_tasks_delete')]
+    public function delete(
+        string $user_slug,
+        EntityManagerInterface $entityManagerInterface,
+        Task $task
+    ): Response
+    {
+        $entityManagerInterface->remove($task);
+        $entityManagerInterface->flush();
+        //$this->addFlash("success", "Vous avez bien supprimé votre tâche.");
+        return $this->redirectToRoute("app_tasks_show",['user_slug' => $user_slug]);
     }
 }

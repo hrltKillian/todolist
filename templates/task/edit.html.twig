@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Task{% endblock %}
+
+{% block body %}
+<a href="{{ path('app_tasks_show', {user_slug: user_slug}) }}">Retour</a>
+
+{{ form(form) }}
+{% endblock %}
