@@ -11,10 +11,10 @@
 
 {% for user in users %}
 <div>
-    <h2>{{ user.username }}</h2>    
+    <h2><a href="{{ path('app_tasks_show', { user_slug: user.slug }) }}">{{ user.username }}</a></h2>    
     <p>{{ user.task|length }}</p> 
     <a href="{{ path('app_users_edit', { slug: user.slug }) }}">Edit</a>
-    <a href="{{ path('app_users_delete', { slug: user.slug }) }}" onclick="return confirm('Are you sure to delete {{ user.username }} ?')" >Delete</a>
+    <a href="{{ path('app_users_delete', { slug: user.slug }) }}" onclick="return confirm('Are you sure to delete -{{ user.username }}- ?')" >Delete</a>
 </div>
 {% else %}
     <p>No customer in database</p>
