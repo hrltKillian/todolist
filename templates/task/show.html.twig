@@ -11,11 +11,11 @@
 </div>
 
 <div>
-    <p{% if tasks.isSorted('t.id') %} class="sorted" {% endif %}>
+    <p{% if tasks.isSorted('tasks.id') %} class="sorted" {% endif %}>
         Sort by {{ knp_pagination_sortable(tasks, 'Id', 'tasks.id') }}
     </p>
     
-    <p{% if tasks.isSorted('t.title') %} class="sorted" {% endif %}>
+    <p{% if tasks.isSorted('tasks.title') %} class="sorted" {% endif %}>
         Sort by {{ knp_pagination_sortable(tasks, 'Title', 'tasks.title') }}
     </p>
 </div>
