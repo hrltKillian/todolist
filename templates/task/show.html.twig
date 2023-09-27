@@ -7,7 +7,7 @@
 <div>
     <a href="{{ path('app_users') }}">Customers</a>
     <h1>Tasks</h1>
-    <a href="">Add tasks</a>
+    <a href="{{ path('app_tasks_new', {user_slug: user_slug}) }}">Add tasks</a>
 </div>
 
 {% for task in tasks %}
