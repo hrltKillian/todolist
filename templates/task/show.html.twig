@@ -16,7 +16,7 @@
     </p>
     
     <p{% if tasks.isSorted('t.title') %} class="sorted" {% endif %}>
-        Sort by {{ knp_pagination_sortable(tasks, 'Title', 't.title') }}
+        Sort by {{ knp_pagination_sortable(tasks, 'Title', 'tasks.title') }}
     </p>
 </div>
 

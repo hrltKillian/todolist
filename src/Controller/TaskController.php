@@ -23,12 +23,12 @@ class TaskController extends AbstractController
     ): Response
     {
         $pagination = $paginationInterface->paginate(
-            $taskRepository->createQueryBuilder("t")
-                ->select('t')
-                ->join('t.user','u')
-                ->where('t.user = u.id AND u.slug = :user_slug')
+            $taskRepository->createQueryBuilder("tasks")
+                ->select('tasks')
+                ->join('tasks.user','u')
+                ->where('tasks.user = u.id AND u.slug = :user_slug')
                 ->setParameter('user_slug', $user_slug)
-                ->getQuery()->getResult(),
+                ->getQuery(),
             $request->query->getInt('page', 1),
             3
         );
