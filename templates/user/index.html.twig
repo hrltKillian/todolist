@@ -10,9 +10,13 @@
 </div>
 
 {% for user in users %}
+<div>
     <h2>{{ user.username }}</h2>    
     <p>{{ user.task|length }}</p> 
-    <a href="">Edit</a>
-    <a href="">Delete</a>
+    <a href="{{ path('app_users_edit', { slug: user.slug }) }}">Edit</a>
+    <a href="{{ path('app_users_delete', { slug: user.slug }) }}" onclick="return confirm('Are you sure to delete {{ user.username }} ?')" >Delete</a>
+</div>
+{% else %}
+    <p>No customer in database</p>
 {% endfor %}
 {% endblock %}

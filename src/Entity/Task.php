@@ -24,7 +24,7 @@ class Task
     #[ORM\Column(length: 255, unique: true)] // Modifiez ces lignes pour personnalisé votre slug en fonction des champs de votre entité
     #[Gedmo\Slug(
         fields: ['title'],
-        updatable: false,
+        updatable: true,
         separator:"_",
         unique: true,
     )]

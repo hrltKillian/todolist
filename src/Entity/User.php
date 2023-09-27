@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, unique: true)] // Modifiez ces lignes pour personnalisé votre slug en fonction des champs de votre entité
     #[Gedmo\Slug(
         fields: ['username'],
-        updatable: false,
+        updatable: true,
         separator:"_",
         unique: true,
     )]

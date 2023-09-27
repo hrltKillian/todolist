@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,11 +36,44 @@ class UserController extends AbstractController
             $user = $form->getData();
             $entityManagerInterface->persist($user);
             $entityManagerInterface->flush();
-            $this->addFlash("success", "Vous avez bien créé votre compte client.");
+            //$this->addFlash("success", "Vous avez bien créé votre compte client.");
             return $this->redirectToRoute("app_users");
         }
         return $this->render('user/new.html.twig', [
             "form" => $form,
         ]);
+    }
+
+    #[Route('/users/{slug}/edit', name: 'app_users_edit')]
+    public function edit(
+        Request $request,
+        EntityManagerInterface $entityManagerInterface,
+        User $user
+    ): Response
+    {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            $entityManagerInterface->flush();
+            //$this->addFlash("success", "Vous avez bien édité votre compte client.");
+            return $this->redirectToRoute("app_users");
+        }
+        return $this->render('user/edit.html.twig', [
+            "form" => $form,
+            "user" => $user
+        ]);
+    }
+
+    #[Route('/users/{slug}/delete', name: 'app_users_delete')]
+    public function delete(
+        EntityManagerInterface $entityManagerInterface,
+        User $user
+    ): Response
+    {
+        $entityManagerInterface->remove($user);
+        $entityManagerInterface->flush();
+        //$this->addFlash("success", "Vous avez bien supprimé votre compte client.");
+        return $this->redirectToRoute("app_users");
     }
 }
