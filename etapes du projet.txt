@@ -1,0 +1,113 @@
+Projet symfony todolist étapes
+
+
+
+
+
+
+
+
+
+
+
+
+
+stylisé le projet
+
+------------------------------------------------------------------------------------------------
+
+-panel admin ou être le bon user pour supprimer, ajouter, modifier des tâches
+
+donner les roles aux routes 
+
+faire en sorte de tomber sur la page de login quand on est sur une page réservée (ne marche pas)
+
+créer une page de login 
+
+xxxxx Créer une fixture pour un user admin xxxxx
+
+--------------------------------------------
+
+push le toggle avancé (ne marche pas)
+
+modifier le toggle pour avoir celui avancé (ne marche pas)
+
+xxxxx push le toggle xxxxx
+
+xxxxx ajouter un toggle sur les tâches xxxxx
+
+----------------------------------------
+
+xxxxx push la pagination xxxxx
+
+xxxxx ajouter la pagination xxxxx
+
+---------------------------------------
+
+xxxxx push bootstrap xxxxx
+
+xxxxx ajouter bootstrap xxxxx
+
+----------------------------------------
+xxxxx push les flash messages xxxxx
+
+xxxxx-ajouter les flash messages xxxxx
+
+-----------------------------------------
+
+xxxxx-crud des deux entités xxxxx
+
+------------------------------------------
+
+xxxxx push le edit et delete task xxxxx
+
+xxxxx créer le delete task xxxxx
+
+xxxxx créer le edit task xxxxx
+
+xxxxx push le add task xxxxx
+
+xxxxx créer le add task xxxxx
+
+xxxxx push la page d'affichage de toute les task xxxxx
+
+xxxxx créer la page d'affichage de toute les task xxxxx
+
+
+-------------------------------------------
+
+xxxxx push le edit et delete user xxxxx
+
+xxxxx créer le delete user xxxxx
+
+xxxxx créer le edit user xxxxx
+
+xxxxx push le add user xxxxx
+
+xxxxx créer le add user xxxxx
+
+xxxxx créer la page d'affichage de tous les users xxxxx
+
+xxxxx push la home page xxxxx
+
+xxxxx home page xxxxx
+
+-------------------------------------------
+
+xxxxxx créer l'user user pour l'authentification xxxxxx
+
+xxxxxx créer l'entité task xxxxxx
+
+xxxxxx créer la relation entre elles xxxxxx
+
+-------------------------------------------
+
+xxxxxx go créer el symfonyto projecto xxxxxx
+
+xxxxxx go créer le github d'abord xxxxxx
+
+xxxxxx installer tout les bundle principaux xxxxxx
+
+xxxxxx push pour la première fois le projet xxxxxx
+
+xxxxxx-prototype de l'app (le dessin) xxxxxx
