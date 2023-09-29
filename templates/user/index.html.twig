@@ -3,33 +3,32 @@
 {% block title %}Users{% endblock %}
 
 {% block body %}
-<div>
-    <a href="{{ path('app_home') }}">Home</a>
-    <h1>Customers</h1>
-    <a href="{{ path('app_users_new') }}">Add customer</a>
-</div>
-
-<div>
-    <p{% if users.isSorted('u.id') %} class="sorted" {% endif %}>
-        Sort by {{ knp_pagination_sortable(users, 'Id', 'u.id') }}
-    </p>
-    
-    <p{% if users.isSorted('u.username') %} class="sorted" {% endif %}>
-        Sort by {{ knp_pagination_sortable(users, 'Username', 'u.username') }}
-    </p>
-</div>
-
-{% for user in users %}
-<div>
-    <h2><a href="{{ path('app_tasks_show', { user_slug: user.slug }) }}">{{ user.username }}</a></h2>    
-    <p>{{ user.task|length }}</p> 
-    <a href="{{ path('app_users_edit', { slug: user.slug }) }}">Edit</a>
-    <a href="{{ path('app_users_delete', { slug: user.slug }) }}" onclick="return confirm('Are you sure to delete -{{ user.username }}- ?')" >Delete</a>
-</div>
-{% else %}
-    <p>No customer in database</p>
-{% endfor %}
-<div class="navigation">
-    {{ knp_pagination_render(users) }}
-</div>
+    <div>
+        <a href="{{ path('app_home') }}">Home</a>
+        <h1>Customers</h1>
+        <a href="{{ path('app_users_new') }}">Add customer</a>
+    </div>
+    <div>
+        <p{% if users.isSorted('u.id') %} class="sorted" {% endif %}>
+            Sort by {{ knp_pagination_sortable(users, 'Id', 'u.id') }}
+        </p>
+        <p{% if users.isSorted('u.username') %} class="sorted" {% endif %}>
+            Sort by {{ knp_pagination_sortable(users, 'Username', 'u.username') }}
+        </p>
+    </div>
+    {% for user in users %}
+        <div>
+            <h2>
+                <a href="{{ path('app_tasks_show', { userSlug: user.slug }) }}">{{ user.username }}</a>
+            </h2>    
+            <p>{{ user.task|length }}</p> 
+            <a href="{{ path('app_users_edit', { slug: user.slug }) }}">Edit</a>
+            <a href="{{ path('app_users_delete', { slug: user.slug }) }}" onclick="return confirm('Are you sure to delete -{{ user.username }}- ?')" >Delete</a>
+        </div>
+    {% else %}
+        <p>No customer in database</p>
+    {% endfor %}
+        <div class="navigation">
+            {{ knp_pagination_render(users) }}
+        </div>
 {% endblock %}

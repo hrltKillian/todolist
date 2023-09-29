@@ -19,8 +19,7 @@ class UserController extends AbstractController
         UserRepository $userRepository,
         PaginatorInterface $paginationInterface,
         Request $request
-    ): Response
-    {
+    ): Response {
         $pagination = $paginationInterface->paginate(
             $userRepository->createQueryBuilder("u"),
             $request->query->getInt('page', 1),
@@ -36,12 +35,10 @@ class UserController extends AbstractController
     public function add(
         Request $request,
         EntityManagerInterface $entityManagerInterface
-    ): Response
-    {
+    ): Response {
         $form = $this->createForm(UserType::class);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) 
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
             $entityManagerInterface->persist($user);
             $entityManagerInterface->flush();
@@ -58,12 +55,10 @@ class UserController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManagerInterface,
         User $user
-    ): Response
-    {
+    ): Response {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) 
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManagerInterface->flush();
             $this->addFlash("success", "Vous avez bien édité votre compte client.");
             return $this->redirectToRoute("app_users");
@@ -78,8 +73,7 @@ class UserController extends AbstractController
     public function delete(
         EntityManagerInterface $entityManagerInterface,
         User $user
-    ): Response
-    {
+    ): Response {
         $entityManagerInterface->remove($user);
         $entityManagerInterface->flush();
         $this->addFlash("success", "Vous avez bien supprimé votre compte client.");
